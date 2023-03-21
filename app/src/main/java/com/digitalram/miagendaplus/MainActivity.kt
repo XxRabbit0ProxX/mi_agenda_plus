@@ -120,7 +120,7 @@ class MainActivity : AppCompatActivity() {
         actividad.putExtra("correocto", cto.correocto)
         actividad.putExtra("tienewhats", cto.tienewhats)
         actividad.putExtra("iduser", cto.iduser)
-        actividad.putExtra("accion", "editar")
+        actividad.putExtra("accion", "descripción")
 
         startActivity(actividad)
     }

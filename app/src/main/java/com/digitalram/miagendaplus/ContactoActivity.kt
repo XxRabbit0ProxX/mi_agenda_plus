@@ -45,6 +45,9 @@ class ContactoActivity : AppCompatActivity() {
 
         var actividad = intent
 
+        //Vaciado de la accion de la pantalla
+        var accion = actividad.getStringExtra("accion")
+
         // Vaciado de las cajas de texto
         var txtnomcon = txtNomCon.text.toString()
         var txtapecon = txtApeCon.text.toString()
@@ -56,6 +59,30 @@ class ContactoActivity : AppCompatActivity() {
         var rbn = rbN.isChecked
         var tieneWhats = ""
 
+        when{
+            accion == "descripcion" ->{
+
+                // Vaciar valores de la actividad anterior en variables nuevas
+                var idcon = actividad.getStringExtra("idcto")
+                var nomcon = actividad.getStringExtra("nomcto")
+                var apecon = actividad.getStringExtra("apecto")
+                var numcelcon = actividad.getStringExtra("numcelcto")
+                var correocon = actividad.getStringExtra("correocto")
+                var tienewhats = actividad.getStringExtra("tienewhats")
+                var idusercon = actividad.getStringExtra("iduser")
+
+                // Deshabilitar los campos en caso de que el usuario solo quiera ver los datos de su contacto
+                txtNumCon.isEnabled = false
+                txtApeCon.isEnabled = false
+                txtNumCon.isEnabled = false
+                txtCorrCon.isEnabled = false
+                rgTieneWhats.isEnabled = false
+
+                txtNomCon.setText(nomcon)
+                txtNomCon.setText(nomcon)
+                txtNomCon.setText(nomcon)
+            }
+        }
         // Almacena el id del usuario
         var idUser = actividad.getStringExtra("idUser").toString()
 
