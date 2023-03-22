@@ -48,14 +48,9 @@ class MainActivity : AppCompatActivity() {
 
         admin = AdminBD(this)
 
-        var actividad = intent
-        var usuariolog : Boolean
+        if (!correoExiste()){
 
-        usuariolog = actividad.getBooleanExtra("usuariolog", false)
-
-        if (usuariolog == false){
-
-            startActivity(Intent(this,LoginActivity::class.java))
+            startActivity(Intent(this,RegisterActivity::class.java))
             finish()
         }
 
@@ -181,6 +176,24 @@ class MainActivity : AppCompatActivity() {
                 btnAgregarContacto.isVisible = false
                 btnMenu.setImageDrawable(resources.getDrawable(R.drawable.ic_menu_black, null))
             }
+        }
+    }
+
+    // Verifica si existe un correo en la BD de SQLite
+    fun correoExiste() : Boolean{
+
+        val sentencia = "SELECT correo_user, alta_user FROM usuarios"
+        val result: Cursor? = admin.Consultar(sentencia)
+
+        if (result != null && result.moveToFirst()) {
+
+            Toast.makeText(this, "Bienvenido -> " + result.getInt(0).toString() + "alta: " + result.getString(1), Toast.LENGTH_SHORT).show()
+            result.close()
+            return true
+        }
+        else{
+
+            return false
         }
     }
 }

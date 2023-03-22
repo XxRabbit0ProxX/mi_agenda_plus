@@ -16,13 +16,13 @@ class AdminBD(context: Context): SQLiteOpenHelper(context, "BDMiAgendaPlus", nul
         if (db != null) {
 
             // Se ejecutan sentencias SQL para crear tablas
-            db.execSQL("CREATE TABLE usuarios(id_user INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "nom_user TEXT, ape_user TEXT, numcel_user TEXT UNIQUE, correo_user TEXT UNIQUE," +
-                    "pass_user TEXT)")
+            db.execSQL("CREATE TABLE usuarios(correo_user TEXT PRIMARY KEY UNIQUE," +
+                    "nom_user TEXT, pass_user TEXT, alta_user DATE)")
 
             db.execSQL("CREATE TABLE contactos(id_cto INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "nom_cto TEXT, ape_cto TEXT, numcel_cto TEXT, correo_cto TEXT," +
-                    "tiene_whatsapp TEXT, id_user INTEGER, FOREIGN KEY (id_user) REFERENCES usuarios(id_user))")
+                    "nom_cto TEXT, dom_cto TEXT, correo_cto TEXT," +
+                    "tel_cto TEXT, cel_cto TEXT, cumple_cto DATE, alta_cto DATE, correo_user TEXT" +
+                    ", FOREIGN KEY (correo_user) REFERENCES usuarios(correo_user))")
         }
     }
 

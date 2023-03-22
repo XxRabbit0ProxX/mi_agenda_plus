@@ -64,33 +64,9 @@
                     android:id="@+id/txtNombre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Ingresa tu nombre" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtApellido"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Ingresa tu apellido" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtTelefonoCel"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Ingresa tu numero telefonico" />
+                    android:hint="Ingresa tu nombre"
+                    android:maxLines="1"
+                    android:scrollHorizontally="true" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -103,7 +79,10 @@
                     android:id="@+id/txtCorreo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Ingresa tu correo electronico" />
+                    android:hint="Ingresa tu correo electronico"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:scrollHorizontally="true" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -116,7 +95,10 @@
                     android:id="@+id/txtContrasena"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Ingresa tu contraseña" />
+                    android:hint="Ingresa tu contraseña"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:scrollHorizontally="true" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -129,7 +111,10 @@
                     android:id="@+id/txtContrasenaRep"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Repite tu contraseña" />
+                    android:hint="Repite tu contraseña"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:scrollHorizontally="true" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
