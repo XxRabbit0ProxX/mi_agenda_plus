@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.digitalram.miagendaplus.ContactoAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
@@ -33,7 +32,9 @@ class MainActivity : AppCompatActivity() {
 
     var contactoLista : List<Contacto> = ArrayList()
 
-    //Metodo de creacion de la actividad
+    private lateinit var correoUser : String
+
+    // Metodo de creacion de la actividad
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
@@ -41,6 +42,8 @@ class MainActivity : AppCompatActivity() {
 
         //Inicializacion de componentes
         toolbar = findViewById(R.id.toolbar)
+        btnAgregarContacto = findViewById(R.id.fabAgregarContacto)
+        btnMenu = findViewById(R.id.fabMenu)
 
         //Inflar toolbar
         setSupportActionBar(toolbar)
@@ -88,18 +91,19 @@ class MainActivity : AppCompatActivity() {
         //---------------------------------------------------------------
     }
 
-    //Metodo de creacion del menu de opciones
+    // Metodo de creacion del menu de opciones
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+
         menuInflater.inflate(R.menu.menu, menu)
         return true
     }
 
     fun btnAddContactoClick(view: View) {
-        var act = intent
+
         var actividad = Intent(this,ContactoActivity::class.java)
 
-        actividad.putExtra("idUser", act.getStringExtra("idUser").toString())
-        Toast.makeText(this, "id de usuario: " + act.getStringExtra("idUser"), Toast.LENGTH_SHORT).show()
+        actividad.putExtra("correoUser", correoUser)
+        Toast.makeText(this, "correo de usuario: " + correoUser, Toast.LENGTH_SHORT).show()
         actividad.putExtra("accion", "agregar")
         startActivity(actividad)
     }
@@ -109,13 +113,19 @@ class MainActivity : AppCompatActivity() {
         var actividad = Intent(this, ContactoActivity::class.java)
 
         actividad.putExtra("idcto", cto.idcto)
+
         actividad.putExtra("nomcto", cto.nomcto)
-        actividad.putExtra("apecto", cto.apecto)
+        actividad.putExtra("domcto", cto.domcto)
         actividad.putExtra("numcelcto", cto.numcelcto)
+        actividad.putExtra("numtelcto", cto.numtelcto)
         actividad.putExtra("correocto", cto.correocto)
-        actividad.putExtra("tienewhats", cto.tienewhats)
-        actividad.putExtra("iduser", cto.iduser)
-        actividad.putExtra("accion", "descripción")
+        actividad.putExtra("cumplecto", cto.cumplecto)
+
+        actividad.putExtra("altacto", cto.altacto)
+
+        actividad.putExtra("correoUser", cto.correouser)
+
+        actividad.putExtra("accion", "descripcion")
 
         startActivity(actividad)
     }
@@ -133,29 +143,32 @@ class MainActivity : AppCompatActivity() {
 
     fun llenaListaContactos() : MutableList<Contacto>{
 
-        var act = intent
-        val iduser = act.getStringExtra("idUser").toString()
-
         var listCto : MutableList<Contacto> = ArrayList()
 
-        val sentencia : String = "SELECT A.id_cto, A.nom_cto, A.ape_cto, A.numcel_cto, A.correo_cto, A.tiene_whatsapp, A.id_user" +
-                                    "FROM Contactos AS A" +
-                                    "INNER JOIN Usuarios AS B ON A.id_usuario = B.id_usuario" +
-                                    "WHERE B.id_usuario = $iduser ORDER BY A.nom_cto"
+        //                                  0           1           2       3          4           5           6               7              8
+        val sentencia : String = "SELECT A.id_cto, A.nom_cto, A.dom_cto, A.cel_cto, A.tel_cto, A.correo_cto, A.cumple_cto, A.alta_cto, A.correo_user " +
+                                    "FROM contactos AS A " +
+                                    "INNER JOIN usuarios AS B ON A.correo_user = B.correo_user " +
+                                    "WHERE B.correo_user = '$correoUser' ORDER BY A.nom_cto"
 
         var result : Cursor? = admin.Consultar(sentencia)
 
         if(result!=null) {
             while (result!!.moveToNext()) {
-                val idc = result.getInt(0).toInt()
-                val nomc = result.getString(1).toString()
-                val apec = result.getString(2).toString()
-                val numcelc = result.getString(3).toString()
-                val correoc = result.getString(4).toString()
-                val tienew = result.getString(5).toString()
-                val idu = result.getInt(6).toInt()
 
-                listCto.add(Contacto(idc, nomc, apec, numcelc, correoc, tienew, idu))
+                val idc = result.getInt(0).toInt()
+
+                val nomc = result.getString(1).toString()
+                val domc = result.getString(2).toString()
+                val numcelc = result.getString(3).toString()
+                val numtelc = result.getString(4).toString()
+                val correoc = result.getString(5).toString()
+                val cumplec = result.getString(6).toString()
+                val altac = result.getString(7).toString()
+
+                val correou = result.getString(8).toString()
+
+                listCto.add(Contacto(idc, nomc, domc, numcelc, numtelc, correoc, cumplec, altac, correou))
             }
         }
         return listCto
@@ -187,7 +200,9 @@ class MainActivity : AppCompatActivity() {
 
         if (result != null && result.moveToFirst()) {
 
-            Toast.makeText(this, "Bienvenido -> " + result.getInt(0).toString() + "alta: " + result.getString(1), Toast.LENGTH_SHORT).show()
+            correoUser = result.getString(0).toString()
+
+            Toast.makeText(this, "Bienvenido -> " + correoUser + " alta: " + result.getString(1), Toast.LENGTH_SHORT).show()
             result.close()
             return true
         }

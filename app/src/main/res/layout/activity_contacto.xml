@@ -2,9 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+
+
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ContactoActivity">
+    android:layout_height="match_parent">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -37,7 +38,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <ImageView
@@ -55,7 +56,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="Agregar Usuario"
+                    android:text="Agregar Contacto"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="@android:color/white" />
 
@@ -79,10 +80,10 @@
                     android:layout_marginTop="10dp">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtApellidoContacto"
+                        android:id="@+id/txtDomicilioContacto"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Apellido" />
+                        android:hint="Domicilio" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -92,10 +93,23 @@
                     android:layout_marginTop="10dp">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtNumeroContacto"
+                        android:id="@+id/txtNumeroCelContacto"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Numero celular" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="300dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txtNumeroTelContacto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Numero casa" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -111,53 +125,50 @@
                         android:hint="Correo electronico" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/rounded_textview"
-                    android:text="  El contacto cuenta con whatsapp"
-                    android:textColor="@color/black" />
-
-                <RadioGroup
-                    android:id="@+id/rgTieneWhatsapp"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="300dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
-                    android:background="#DFDFDF"
+                    android:layout_marginTop="10dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txtFechaCumpleanos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Fecha cumpleanos" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="80dp"
+                    android:gravity="center_horizontal"
                     android:orientation="horizontal">
 
-                    <RadioButton
-                        android:id="@+id/rbSi"
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/fabGuardarContacto"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_weight="1"
-                        android:text="Si" />
+                        android:clickable="true"
+                        android:onClick="btnGuardarContactoClick"
+                        app:srcCompat="@drawable/ic_save_black" />
 
-                    <RadioButton
-                        android:id="@+id/rbNo"
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/fabEditar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_weight="1"
-                        android:text="No" />
-
-                </RadioGroup>
-
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/fabGuardarContacto"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="80dp"
-                    android:clickable="true"
-                    android:onClick="btnGuardarContactoClick"
-                    app:srcCompat="@drawable/ic_save_black" />
+                        android:layout_marginLeft="10dp"
+                        android:clickable="true"
+                        android:enabled="false"
+                        android:onClick="btnEditarClick"
+                        android:visibility="invisible"
+                        app:srcCompat="@drawable/ic_edit_black" />
+                </LinearLayout>
 
             </LinearLayout>
         </ScrollView>
     </FrameLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
