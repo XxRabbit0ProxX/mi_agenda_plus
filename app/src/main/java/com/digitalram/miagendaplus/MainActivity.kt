@@ -112,7 +112,7 @@ class MainActivity : AppCompatActivity() {
 
         var actividad = Intent(this, ContactoActivity::class.java)
 
-        actividad.putExtra("idcto", cto.idcto)
+        actividad.putExtra("idcto", cto.idcto.toString())
 
         actividad.putExtra("nomcto", cto.nomcto)
         actividad.putExtra("domcto", cto.domcto)

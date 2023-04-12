@@ -32,6 +32,8 @@ class ContactoActivity : AppCompatActivity() {
 
     private lateinit var accion : String
 
+    lateinit var idcto : String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
@@ -75,6 +77,8 @@ class ContactoActivity : AppCompatActivity() {
 
         // En caso de iniciarse la actividad por un RecyclerView Clicado
         if (accion == "descripcion") {
+
+            idcto = act.getStringExtra("idcto").toString()
 
             // Vaciar intents a los campos de texto
             txtNomCon.setText(act.getStringExtra("nomcto"))
@@ -120,7 +124,7 @@ class ContactoActivity : AppCompatActivity() {
         // Vacia la fecha actual del dispositivo en una variable
         var fechaActual = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
 
-        // Vacia el correo del usuario en una variable usando un intent
+        // Vacia el correo del usuario y el id del contacto en una variable usando un intent
         var correoUser = actividad.getStringExtra("correoUser").toString()
 
         /*
@@ -189,7 +193,7 @@ class ContactoActivity : AppCompatActivity() {
 
             var sentencia = "UPDATE contactos SET nom_cto = '$txtnomcon', dom_cto = '$txtdomcon', cel_cto = '$txtnumcelcon', tel_cto = '$txtnumtelcon', " +
                     "correo_cto = '$txtcorrcon', cumple_cto = '$txtcumplecon' " +
-                    "WHERE correo_user = '$correoUser'"
+                    "WHERE correo_user = '$correoUser' AND id_cto = $idcto"
 
             when{
 
